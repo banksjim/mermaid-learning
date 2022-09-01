@@ -11,6 +11,22 @@
             B-->D(fa:fa-spinner);
         </div>
         <div class="mermaid">
+
+            %%{
+                init: {
+                  "theme": "dark",
+                  "fontFamily": "monospace",
+                  "logLevel": "info",
+                  "flowchart": {
+                    "htmlLabels": true,
+                    "curve": "linear"
+                  },
+                  "sequence": {
+                    "mirrorActors": true
+                  }
+                }
+            }%%
+
             graph TD 
             A[Client] --> B[Load Balancer] 
             B --> C[Server1] 
