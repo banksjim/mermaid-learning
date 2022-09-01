@@ -2,15 +2,13 @@
 # Mermaid tutorial
 Exercises for YouTube introductory video: "Mermaid JS: Finally There's A Great UML & Diagram Drawing Tool"; https://youtu.be/JiQmpA474BY
 
-
-
 ## Flowchart Diagram Example
 
 ```mermaid
 flowchart LR
-    Start-Login --> A(Enter your email address);
-    A --> B{Existing user?};
-    B --> |Yes| C[Start login];
+    Start-Login ==> A(Enter your email address);
+    A ==> B{Existing user?};
+    B ==> |Yes| C[Start login];
     B --> |No| D(Enter name);
     D --> E{Accept conditions?};
     E --> C;
