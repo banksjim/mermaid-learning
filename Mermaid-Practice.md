@@ -1,7 +1,8 @@
 
-> Exercises for YouTube introductory video: "Mermaid JS: Finally There's A Great UML & Diagram Drawing Tool"; https://youtu.be/JiQmpA474BY
-
 # Mermaid tutorial
+Exercises for YouTube introductory video: "Mermaid JS: Finally There's A Great UML & Diagram Drawing Tool"; https://youtu.be/JiQmpA474BY
+
+
 
 ## Flowchart Diagram Example
 
@@ -100,7 +101,7 @@ classDiagram
 <hr>
 ## Entity-Relationship Diagram Example
 
-> A good diagram for entity domain modeling
+A good diagram for entity domain modeling
 
 > |o or o| = Zero or one
 > || or || = Exactly one
