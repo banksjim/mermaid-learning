@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+        
+        <script>
+        var callback = function () {
+            alert('A callback was triggered');
+        };
+        var config = {
+            startOnLoad: true,
+            flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'cardinal' },
+            securityLevel:'loose'
+        };
+        mermaid.initialize(config);
+        </script>
+
+        <div class="mermaid">
+        flowchart LR
+            A-->B
+            B-->C
+            C-->D
+            click A callback "Tooltip"
+            click B "https://www.github.com" "This is a link"
+            click C call callback() "Tooltip"
+            click D href "https://www.github.com" "This is a link"
+        </div>
+    </body>
+</html>
