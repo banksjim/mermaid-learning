@@ -149,3 +149,146 @@ To describe the visibility (or encapsulation) of an attribute or method/function
 -----
 
 ## Defining relationship
+
+A relationship is a general term covering the specific types of logical connections found on class and object diagrams.
+
+```[classA][Arrow][ClassB]:LabelText```
+
+There are eight different types of relations defined for classes under UML which are currently supported:
+
+| Type  | Description         |
+| ----- | ------------------- |
+| <\|-- | Inheritance         |
+| \*--   | Composition         |
+| o--   | Aggregation         |
+| -->   | Association         |
+| --    | Link (solid)        |
+| ..>   | Dependency          |
+| ..\|> | Realization         |
+| ..    | Link (dashed)       |
+
+Examples:
+
+```mermaid
+  classDiagram
+    classA <|-- classB
+    classC *-- classD
+    classE o-- classF
+    classG <-- classH
+    classI -- classJ
+    classK <.. classL
+    classM <|.. classN
+    classO .. classP
+```
+
+We can use the labels to describe the nature of the relation between two classes. Also, arrowheads can be used in the opposite direction as well:
+
+```mermaid
+  classDiagram
+    classA <|-- classB : Inheritance
+    classC *-- classD : Composition
+    classE o-- classF : Aggregation
+    classG <-- classH : Association
+    classI -- classJ : Link (solid)
+    classK <.. classL : Dependency
+    classM <|.. classN : Realization
+    classO .. classP : Link (dashed)
+```
+
+Relations can logically represent an N:M association:
+
+Where ```Relation Type``` can be one of:
+
+| Type  | Description         |
+| ----- | ------------------- |
+| <\|   | Inheritance         |
+| *     | Composition         |
+| o     | Aggregation         |
+| >     | Association         |
+| <     | Association         |
+| \|>   | Realization         |
+
+And ```Link``` can be one of:
+
+| Type  | Description         |
+| ----- | ------------------- |
+| --    | Solid               |
+| ..    | Dashed              |
+
+-----
+
+## Cardinality / Multiplicity on relations
+
+Multiplicity or cardinality in class diagrams indicates the number of instances of one class that can be linked to an instance of the other class. For example, each company will have one or more employees (not zero), and each employee currently works for zero or one companies.
+
+Multiplicity notations are placed near the end of an association.
+
+The different cardinality options are:
+
+- ```1``` Only 1
+- ```0..1``` Zero or one
+- ```1..*``` One or more
+- ```*``` Many
+- ```n``` n (where n > 1)
+- ```0..n``` Zero to n (where n > 1)
+- ```1..n``` One to n (where n > 1)
+
+Cardinality can be easily defined by placing the text option within quotes ```"```.
+
+```[classA] "cardinality1" [Arrow] "cardinality2" [ClassB]:LabelText```
+
+Example:
+
+```mermaid
+  classDiagram
+    Customer "1" --> "*" Ticket
+    Student "1" --> "1..*" Course
+    Galaxy "1" --> "many" Stars : Contains
+```
+
+-----
+
+## Annotations on classes
+
+It is possible to annotate classes with markers to provide additional metadata about the class. This can give a clearer indication about its nature. Some common annotations include:
+
+- ```<<Interface>>``` Represents an interface class
+- ```<<Abstract>>``` Represents an abstract class
+- ```<<Service>>``` Represents a service class
+- ```<<Enumeration>>``` Represents an enum
+
+Annotations are defined within the opening ```<<``` and closing ```>>```. There are two ways to add an annotation to a class, and either way the output will be same:
+
+- In a *separate line* after a class is defined:
+
+```mermaid
+  classDiagram
+    class Shape
+    <<interface>> Shape
+    Shape : noOfVertices
+    Shape : draw()
+```
+
+- In a *nested structure* along with the class definition:
+
+```mermaid
+  classDiagram
+    class Shape {
+        <<interface>>
+        noOfVertices
+        draw()
+    }
+    
+    class Color {
+        <<enumeration>>
+        RED
+        BLUE
+        GREEN
+        WHITE
+        BLACK
+    }
+```
+
+-----
+
+## Comments
