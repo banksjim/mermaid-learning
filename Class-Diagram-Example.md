@@ -292,3 +292,96 @@ Annotations are defined within the opening ```<<``` and closing ```>>```. There 
 -----
 
 ## Comments
+
+Comments can be entered within a class diagram, which will be ignored by the parser. Comments need to be on their own line, and must be prefaced with ```%%``` (double percent signs). Any text until the next newline will be treated as a comment, including any class diagram syntax.
+
+```mermaid
+  classDiagram
+    %% This whole line is a comment
+    class Shape {
+        <<interface>>
+        noOfVertices
+        draw()
+    }
+```
+
+-----
+
+## Setting the direction of the diagram
+
+With class diagrams you can use the direction statement to set the direction in which the diagram will render:
+
+```mermaid
+  classDiagram
+    direction RL
+
+    class Student {
+        -idCard : IdCard
+    }
+
+    class IdCard {
+        -id : int
+        -name : string
+    }
+
+    class Bike {
+        -id : int
+        -name : string
+    }
+
+    Student "1" --o "1" IdCard : carries
+    Student "1" --o "1" Bike : rides
+```
+
+-----
+
+## Interaction
+
+It is possible to bind a click event to a node. The click can lead to either a javascript callback or to a link which will be opened in a new browser tab. **Note:** This functionality is disabled when using ```securityLevel='strict'``` and enabled when using ```securityLevel='loose'```.
+
+You would define these actions on a separate line after all classes have been declared.
+
+```markdown
+action className "reference" "tooltip"
+click className call callback() "tooltip"
+click className href "url" "tooltip"
+```
+
+- *action* is either ```link``` or ```callback```, depending on which type of interaction you want to have called
+- *className* is the id of the node that the action will be associated with
+- *reference* is either the url link, or the function name for callback.
+- *(optional) tooltip* is a string to be displayed when hovering over element (Note: The styles of the tooltip are set by the class .mermaidTooltip.)
+- **Note:** Callback function will be called with the nodeId as parameter.
+
+### Examples
+
+*URL Link:*
+
+```mermaid
+  classDiagram
+    class Shape
+    link Shape "https://www.github.com" "This ia a tooltip for a link"
+
+    class Shape2
+    click Shape2 href "https://www.github.com" "This is also a tooltip for a link"
+```
+
+*Callback:*
+
+```mermaid
+  classDiagram
+    class Shape
+    callback Shape "callbackFunction" "This is a tooltip for a callback"
+    
+    class Shape 2
+    click Shape2 call callbackFunction() "This is a tooltip for a callback"
+```
+
+```javascript
+    <script>
+      var callbackFunction = function() {
+        alert('A callback was triggered');
+      }
+    </script>
+```
+

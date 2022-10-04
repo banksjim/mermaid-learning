@@ -1,0 +1,51 @@
+<html>
+    <body>
+
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+
+        <script>
+            var callbackFunction = function () {
+                alert('A callback was triggered');
+            };
+            var config = {
+                startOnLoad: true,
+                securityLevel: 'loose'
+            };
+            mermaid.initialize(config);
+        </script>
+
+        <div class="mermaid">
+            classDiagram
+            Animal <|-- Duck
+            Animal <|-- Fish
+            Animal <|-- Zebra
+            Animal : +int age
+            Animal : +String gender
+            Animal: +isMammal()
+            Animal: +mate()
+            
+            class Duck{
+                +String beakColor
+                +swim()
+                +quack()
+                }
+            
+            class Fish{
+                -int sizeInFeet
+                -canEat()
+                }
+            
+            class Zebra{
+                +bool is_wild
+                +run()
+                }
+        
+                callback Duck "callbackFunction" "Tooltip"
+                link Zebra "https://www.github.com" "This is a link"
+        </div>
+
+    </body>
+  </html>
