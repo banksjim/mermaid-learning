@@ -59,6 +59,17 @@ Another way to define a state with a description is to define the state id follo
     s2 : This is a state description
 ```
 
+### Spaces in state names
+
+Spaces can be added to a state by defining it at the top and referencing the acronym later.
+
+```mermaid
+  stateDiagram-v2
+    Yswsii : Your state with spaces in it
+
+    [*] --> Yswsii
+```
+
 -----
 
 ## Transitions
@@ -197,3 +208,85 @@ It is possible to specify a fork in the diagram using \<\<fork>> \<\<join>>. Exa
 -----
 
 ## Notes
+
+You can choose to put a note to the right of or to the left of a node. Example:
+
+```mermaid
+  stateDiagram-v2
+    State1 : The State with a note
+
+    note right of State1
+      Important information!
+      You can write notes.
+    end note
+
+    State1 --> State2
+
+    note left of State2 : This is the note to the left.
+```
+
+-----
+
+## Concurrency
+
+As in plantUml you can specify concurrency using the -- symbol.
+
+```mermaid
+  stateDiagram-v2
+    [*] --> Active
+
+    state Active {
+        [*] --> NumLockOff
+        NumLockOff --> NumLockOn : EvNumLockPressed
+        NumLockOn --> NumLockOff : EvNumLockPressed
+        --
+        [*] --> CapsLockOff
+        CapsLockOff --> CapsLockOn : EvCapsLockPressed
+        CapsLockOn --> CapsLockOff : EvCapsLockPressed
+        --
+        [*] --> ScrollLockOff
+        ScrollLockOff --> ScrollLockOn : EvScrollLockPressed
+        ScrollLockOn --> ScrollLockOff : EvScrollLockPressed
+    }
+```
+
+-----
+
+## Setting the direction of the diagram
+
+With state diagrams you can use the direction statement to set the direction which the diagram will render like in this example.
+
+```mermaid
+  stateDiagram-v2
+    direction LR
+    [*] --> A
+    A --> B
+    B --> C
+
+    state B {
+      direction LR
+
+      a --> b
+    }
+
+    B --> D
+```
+
+-----
+
+## Comments
+
+Comments can be entered within a state diagram chart, which will be ignored by the parser. Comments need to be on their own line, and must be prefaced with `%%` (double percent signs). Any text after the start of the comment to the next newline will be treated as a comment, including any diagram syntax. Example:
+
+```mermaid
+  stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+
+    %% This is a comment
+
+    Still --> Moving
+    Moving --> Still %% This is another comment
+    Moving --> Crash
+    Crash --> [*]
+```
