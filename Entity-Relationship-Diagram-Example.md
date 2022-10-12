@@ -50,3 +50,127 @@ ER diagrams can be used for various purposes, ranging from abstract logical mode
 -----
 
 ## Syntax
+
+### Entities and relationships
+
+Mermaid syntax for ER diagrams is compatible with PlantUML, with an extension to label the relationship. Each statement consists of the following parts:
+
+```markdown
+
+<first-entity> [<relationship> <second-entity> : <relationship-label>]
+
+```
+
+Where:
+
+- `first-entity` is the name of an entity. Names must begin with an alphabetic character and may also contain digits, hyphens, and underscores.
+- `relationship` describes the way that both entities inter-relate. See below.
+- `second-entity` is the name of the other entity.
+- `relationship-label` describes the relationship from the perspective of the first entity.
+
+Example:
+
+```markdown
+
+PROPERTY ||--|{ ROOM : contains
+
+```
+
+This statement can be read as *a property contains one or more rooms, and a room is part of one and only one property*. You can see that the label here is from the first entity's perspective: a property contains a room, but a room does not contain a property. When considered from the perspective of the second entity, the equivalent label is usually very easy to infer. (Some ER diagrams label relationships from both perspectives, but this is not supported in MermaidJS, and is usually superfluous).
+
+Only the `first-entity` part of a statement is mandatory. This makes it possible to show an entity with no relationships, which can be useful during iterative construction of diagrams. If any other parts of a statement are specified, then all parts are mandatory.
+
+### Relationship syntax
+
+The `relationship` part of each statement can be broken down into three sub-components:
+
+- The cardinality of the first entity with respect to the second
+- Whether the relationship confers identity on a 'child' entity
+- The cardinality of the second entity with respect to the first
+
+Cardinality is a property that describes how many elements of another entity can be related to the entity in question. In the above example a `PROPERTY` can have one or more ROOM instances associated to it, whereas a `ROOM` can only be associated with one `PROPERTY`. In each cardinality marker there are two characters. The outermost character represents a maximum value, and the innermost character represents a minimum value. The table below summarizes possible cardinalities.
+
+| Value (left) | Value (right)     | Meaning                       |
+| ------------ | ----------------- | ----------------------------- |
+| `\|o`          | `o\|`           | Zero or one                   |
+| `\|\|`         | `\|\|`          | Exactly one                   |
+| `}o`           | `o{`            | Zero or more (no upper limit) |
+| `}\|`          | `\|{`           | One or more (no upper limit)  |
+
+### Identification
+
+Relationships may be classified as either *identifying* or *non-identifying* and these are rendered with either solid or dashed lines respectively. This is relevant when one of the entities in question cannot have independent existence without the other. For example a firm that insures people to drive cars might need to store data on `NAMED-DRIVER`s. In modeling this we might start out by observing that a `CAR` can be driven by many `PERSON` instances, and a `PERSON` can drive many `CAR`s - both entities can exist without the other, so this is a non-identifying relationship that we might specify in Mermaid as: `PERSON }|..|{ CAR : "driver"`.
+
+- If you want the relationship label to be more than one word, you must use double quotes around the phrase
+- If you don't want a label at all on a relationship, you must use an empty double-quoted string
+
+```mermaid
+  erDiagram
+    PERSON }|..|{ CAR : driver  
+```
+
+**Note** the two dots in the middle of the above relationship that will result in a dashed line being drawn between the two entities.
+
+But when this many-to-many relationship is resolved into two one-to-many relationships, we observe that a `NAMED-DRIVER` cannot exist without both a `PERSON` and a `CAR` - the relationships become identifying and would be specified using hyphens, which translate to a solid line:
+
+```mermaid
+  erDiagram
+    CAR ||--o{ NAMED-DRIVER : allows
+    PERSON ||--o{ NAMED-DRIVER : is
+```
+
+### Attributes
+
+Attributes can be defined for entities by specifying the entity name followed by a block containing multiple `type name` pairs, where a block is delimited by an opening `{` and a closing `}`.
+
+The `type` and `name` values must begin with an alphabetic character and may contain digits, hyphens or underscores. Other than that there are no restrictions, and there is no implicit set of valid data types.
+
+For example:
+
+```mermaid
+  erDiagram
+    CAR ||--o{ NAMED-DRIVER : allows
+    
+    CAR {
+      string registrationNumber
+      string make
+      strong model
+    }
+
+    PERSON ||--o{ NAMED-DRIVER : is
+
+    PERSON {
+      string firstName
+      string lastName
+      int age
+    }
+```
+
+### Attribute keys and comments
+
+Attributes may also have a `key` or comment defined. Keys can be "PK" or "FK", for Primary Key or Foreign Key.
+
+A `comment` is defined by double quotes at the end of an attribute. Comments themselves cannot have double-quote characters in them.
+
+Example:
+
+```mermaid
+  erDiagram
+    CAR ||--o{ NAMED-DRIVER : allows
+
+    CAR {
+      string allowedDriver FK "The license of the allowed driver"
+      string registrationNumber
+      string make
+      string model
+    }
+
+    PERSON ||--o{ NAMED-DRIVER : is
+
+    PERSON {
+      string driversLicense PK "The license #"
+      string firstName
+      string lastName
+      int age
+    }
+```
