@@ -68,7 +68,7 @@ Mermaid distinguishes between attributes and functions/methods based on if the *
 
 There are two ways to define the members of a class, and regardless of whichever syntax is used to define the members, the output will still be same. The two different ways are:
 
-1. Associate a member of a class using : (colon) followed by member name, useful to define one member at a time. For example:
+Associate a member of a class using : (colon) followed by member name, useful to define one member at a time. For example:
 
 ```mermaid
   classDiagram
@@ -80,7 +80,7 @@ There are two ways to define the members of a class, and regardless of whichever
     BankAcccount : +withdrawal(amount)
 ```
 
-2. Associate members of a class using {} brackets, where members are grouped within curly brackets. Suitable for defining multiple members at once. For example:
+Or, Associate members of a class using {} brackets, where members are grouped within curly brackets. Suitable for defining multiple members at once. For example:
 
 ```mermaid
   classDiagram
