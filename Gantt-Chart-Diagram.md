@@ -210,7 +210,7 @@ More info at: https://github.com/d3/d3-time#interval_every
 
 -----
 
-## Comments 
+## Comments
 
 Comments can be entered within a gantt chart, which will be ignored by the parser. Comments need to be on their own line and must be prefaced with `%%`(double percent signs). Any text after the start of the comment to the next newline will be treated as a comment, including any diagram syntax. Example:
 
@@ -231,18 +231,18 @@ Comments can be entered within a gantt chart, which will be ignored by the parse
 
 -----
 
-## Styling 
+## Styling
 
 Styling of the Gantt diagram is done by defining a number of CSS classes. During rendering, these classes are extracted from the file located at `src/diagrams/gantt/styles.js`
 
 ### Classes used
 
-| Class	| Description |
+| Class | Description |
 | --------------------- | ---------------------------------------------------------------------- |
-| grid.tick	| Styling for the Grid Lines |
-| grid.path	| Styling for the Grid's borders |
-| .taskText	| Task Text Styling |
-| .taskTextOutsideRight	| Styling for Task Text that exceeds the activity bar towards the right. |
+| grid.tick | Styling for the Grid Lines |
+| grid.path | Styling for the Grid's borders |
+| .taskText | Task Text Styling |
+| .taskTextOutsideRight | Styling for Task Text that exceeds the activity bar towards the right. |
 | .taskTextOutsideLeft | Styling for Task Text that exceeds the activity bar, towards the left. |
 | todayMarker | Toggle and Styling for the "Today Marker" |
 
@@ -315,7 +315,7 @@ It is possible to adjust the margins for rendering the gantt diagram.
 
 This is done by defining the `ganttConfig` part of the configuration object. How to use the CLI is described in the [mermaidCLI](https://mermaid.js.org/config/mermaidCLI.html) page.
 
-`mermaid.ganttConfig` can be set to a JSON string with config parameters or the corresponding object. Example: 
+`mermaid.ganttConfig` can be set to a JSON string with config parameters or the corresponding object. Example:
 
 ```CSS
 mermaid.ganttConfig = {
@@ -329,7 +329,7 @@ mermaid.ganttConfig = {
 
 Possible configuration params:
 
-| Param	| escription	| Default value |
+| Param | escription | Default value |
 | --------------- | ------------------------------------ | ------------ |
 | mirrorActor | Turns on/off the rendering of actors below the diagram as well as above it | false |
 | bottomMarginAdj | Adjusts how far down the graph ended. Wide borders styles with css could generate unwanted clipping which is why this config param exists. | 1 |
