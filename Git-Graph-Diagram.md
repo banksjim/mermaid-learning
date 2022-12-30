@@ -120,7 +120,7 @@ Example:
   gitGraph
     commit
     commit
-    branch "feature-22343"
+    branch feature-22343
     commit
     commit
     commit
@@ -132,7 +132,7 @@ In the above example, see how we started with default `main` branch, and pushed 
 
 In Mermaid, in order to switch to an existing branch, you make use of the `checkout` keyword. You also need to provide a name of an existing branch. If no branch is found with the given name, it will result in console error. Usage example:
 
-    checkout "feature-22343"
+    checkout feature-22343
 
 When Mermaid, reads the `checkout` keyword, it finds the given branch and sets it as the *current* branch. Equivalent to checking out a branch in the Git world.
 
@@ -142,11 +142,11 @@ Example:
   gitGraph
     commit
     commit
-    branch "feature-22343"
+    branch feature-22343
     commit
     commit
     commit
-    checkout "main"
+    checkout main
     commit
     commit
 ```
@@ -157,7 +157,7 @@ In the above example, see how we started with default `main` branch, and pushed 
 
 In Mermaid, in order to merge or join to an existing branch, you make use of the `merge` keyword. You also need to provide the name of an existing branch to *merge from*. If no branch is found with the given name, it will result in console error. Also, you can only merge two separate branches, and cannot merge a branch with itself. In such case an error is thrown. Example:
 
-    merge "feature-22343"
+    merge feature-22343
 
 When Mermaid, reads the `merge` keyword, it finds the given branch and its head commit (the last commit on that branch), and joins it with the head commit on the *current* branch. Each merge results in a **merge commit**, represented in the diagram with filled double circle.
 
@@ -167,14 +167,14 @@ Example:
   gitGraph
     commit
     commit
-    branch "feature-22343"
+    branch feature-22343
     commit
     commit
     commit
-    checkout "main"
+    checkout main
     commit
     commit
-    merge "feature-22343"
+    merge feature-22343
     commit
     commit
 ```
@@ -189,7 +189,7 @@ You can also decorate your merge with similar attributes as you did for the comm
 
 And you can choose to use none, some or all of the above attributes together. For example:
 
-    merge "feature-22343" id: "my_custom_id" tag: "my_custom_tag" type: REVERSE
+    merge feature-22343 id: "my_custom_id" tag: "my_custom_tag" type: REVERSE
 
 Example:
 
@@ -197,23 +197,23 @@ Example:
   gitGraph
     commit id: "1"
     commit id: "2"
-    branch "nice-feature"
-    checkout "nice-feature"
+    branch nice-feature
+    checkout nice-feature
     commit id: "3"
-    checkout "main"
+    checkout main
     commit id: "4"
-    checkout "nice-feature"
-    branch "very-nice-feature"
+    checkout nice-feature
+    branch very-nice-feature
     commit id: "5"
-    checkout "main"
+    checkout main
     commit id: "6"
-    checkout "nice-feature"
+    checkout nice-feature
     commit id: "7"
-    checkout "main"
-    merge "nice-feature" id: "customId" tag: "customTag" type: REVERSE
-    checkout "very-nice-feature"
+    checkout main
+    merge nice-feature id: "customId" tag: "customTag" type: REVERSE
+    checkout very-nice-feature
     commit id: "8"
-    checkout "main"
+    checkout main
     commit id: "9"
 ```
 
@@ -238,18 +238,18 @@ Example:
 ```mermaid
   gitGraph
     commit id: "Zero"
-    branch "new-feature"
+    branch new-feature
     commit id: "A"
     commit id: "B"
-    checkout "main"
+    checkout main
     commit id: "One"
-    checkout "new-feature"
+    checkout new-feature
     commit id: "C"
-    checkout "main"
+    checkout main
     commit id: "Two"
     cherry-pick id: "B"
     commit id: "Three"
-    checkout "new-feature"
+    checkout new-feature
     commit id: "D"
 ```
 
@@ -488,6 +488,9 @@ In the above example, all the branches without a specified `order` are drawn in 
 -----
 
 ## Themes
+
+> **WARNING!**
+> Obsidian does not support customization of Git Graph themes using inline directives. The following samples still work correctly in other MermaidJS rendering tools.
 
 Mermaid supports a bunch of pre-defined themes which you can use to find the right one for you. You can even override an existing theme's variable to get your own custom theme going. Learn more about theming your diagram below.
 
